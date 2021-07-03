@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "generate_experiments",
+            "type": "python",
+            "request": "launch",
+            "env": {
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceFolder}\\Utils\\generateexperiments.py",
+            "console": "integratedTerminal"
+        }
+
+        {
+            "name": "RL_train",
+            "type": "python",
+            "request": "launch",
+            "env": {
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceFolder}\\Train_trader.py",
+            "console": "integratedTerminal"
+        }
+    
+        {
+            "name": "Simulate",
+            "type": "python",
+            "request": "launch",
+            "env": {
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceFolder}\\simulator.py",
+            "console": "integratedTerminal"
+        }
+        {
+            "name": "Train_network",
+            "type": "python",
+            "request": "launch",
+            "env": {
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceFolder}\\Train_network.py",
+            "console": "integratedTerminal"
+        }
+
+        {
+            "name": "data_cleaning",
+            "type": "python",
+            "request": "launch",
+            "env": {
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceFolder}\\clean_data.py",
+            "console": "integratedTerminal"
+        }
+        {
+            "name": "CrossValidate",
+            "type": "python",
+            "request": "launch",
+            "env": {
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceFolder}\\CrossValidate.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}

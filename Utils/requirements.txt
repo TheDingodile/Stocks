@@ -1,0 +1,18 @@
+cd Desktop
+mkdir Bachelor
+cd Bachelor
+module load python3/3.8.4
+python3 -m venv project-env
+source project-env/bin/activate
+python -m pip install torch torchvision matplotlib
+git config --global credential.helper store
+git clone https://github.com/FredslundMagnus/Bachelorprojekt.git
+cd Bachelorprojekt
+chmod +x run.sh
+chmod +x save.sh
+
+
+cd Desktop/Bachelor/Bachelorprojekt/
+./run.sh
+watch bstat
+./save.sh
