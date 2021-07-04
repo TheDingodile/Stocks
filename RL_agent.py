@@ -89,18 +89,18 @@ class RL_agent():
             return actions
     
     def softmax_explore(self, values):
-        epsilon = 5 * 10**5
+        epsilon = 10**6
         k = max(0.01, 10 * (1 - self.counter/epsilon))
-        if self.counter % 1000 == 0:
+        if self.counter % 10000 == 0:
             print(values[0])
             print(softmax(values / k, dim=1)[0])
             print("eps at " + str(max(0.01, 10 * (1 - self.counter/epsilon))))
         return torch.flatten(torch.multinomial(softmax(values / k, dim=1), 1, replacement=True))
     
     def eps_greedy(self, values):
-        epsilon = 5 * 10**5 / 0.2
-        eps = max(0.01, 0.2 - self.counter/epsilon)
-        if self.counter % 1000 == 0:
+        epsilon = 10**6
+        eps = max(0.01, 0.5 - self.counter/epsilon)
+        if self.counter % 10000 == 0:
             print(values[0])
             print("eps at " + str(eps))
         return torch.argmax(values, dim=1).flatten() if random() > eps else torch.tensor(choice(values.shape[1], values.shape[0]), device=device).long()
