@@ -9,14 +9,14 @@ from saver import loadagent
 device = devicer('cuda' if cuda.is_available() else 'cpu')
 from Normalize_data import normalize
 
-predictor = loadagent("test7")
+predictor = loadagent("test4")
 all_data = torch.load('DayliData.pt').to(device=device)
-normalized_data, normalized_simulate, mins, maxes = normalize(all_data = all_data, train_start = 1100, train_end = 1000, test_start = 1000, test_end = 1)
+normalized_data, normalized_simulate, mins, maxes = normalize(all_data = all_data, train_start = 2100, train_end = 2000, test_start = 2000, test_end = 1001, splits=4)
 print(normalized_data.shape)
 money = 100
 splits = 20
 normal_normalize = False
-five_features = True
+five_features = False
 if normal_normalize:
     with torch.no_grad():
         for j in range(splits):
@@ -60,6 +60,7 @@ else:
                 output = predictor.predict_from_hidden(true_values[:,:,3].unsqueeze(2))
                 expected_percent_difs = (output[:,0,0] - true_prices)/(true_prices + mins[j * len_input:(j+1) * len_input,0,3])
                 true_difs = (normalized_simulate[j * len_input:(j+1) * len_input, i + 1, 3] - true_prices)
+                #money += torch.sum(true_difs)
                 money += torch.sum(true_difs[torch.where(expected_percent_difs > 0.0, True, False)])
                 money -= torch.sum(true_difs[torch.where(expected_percent_difs < -0.0, True, False)])
                 print("Current money " + str(round(money.item()*100)/100) + " after " + str(100 * j/splits) + " %")

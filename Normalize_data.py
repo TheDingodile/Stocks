@@ -54,8 +54,9 @@ def normalize(all_data, train_start, train_end, test_start, test_end, normalizer
     new_all_data2 = new_all_data2[temper]
     print(new_all_data2.shape)
 
-    final_data = new_all_data2[:,:-train_end//splits]
-    simulate = new_all_data2[:,-train_end//splits:]
+    final_data = new_all_data2[:,:-(train_end - train_start)//splits]
+    simulate = new_all_data2[:,-(train_end - train_start)//splits:]
+    print(final_data.shape, simulate.shape, -train_end//splits)
     # torch.sort((new_mins)[:,0,3])[0]
     # plt.plot(torch.sort((new_mins)[:,0,3])[0][:].cpu().numpy())
     # plt.show()

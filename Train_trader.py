@@ -12,7 +12,7 @@ from saver import loadagent, saveAgent
 from Normalize_data import normalize
 
 class trainer():
-    def train(self, name="trader6", data='DayliData.pt', predict="test7", batch_splits=50, epoches=40, time_splits = 4, ts = 1100, te = 1000, tes = 1000, tee = 1):
+    def train(self, name="trader6", data='DayliData.pt', predict="test7", batch_splits=50, epoches=100, time_splits = 3, ts = 1100, te = 1000, tes = 1000, tee = 1):
         all_data = torch.load(data).to(device=device) #yo
         trader = RL_agent()
         predictor = loadagent(predict)
@@ -22,15 +22,16 @@ class trainer():
         for k in range(epoches):
             perm = torch.randperm(normalized_data.size()[0])
             prepare_dat = normalized_data[perm]
+            print(prepare_dat.shape)
             train_dat = normalized_simulate[perm]
             miner = mins[perm]
             maxer = maxes[perm]
             for j in range(batch_splits):
                 len_input = prepare_dat.shape[0]//batch_splits
                 with torch.no_grad():
-                    predictor.prepare_hidden(prepare_dat[j * len_input:(j+1) * len_input])
-                    hidden_state = predictor.output_hidden(train_dat[j * len_input:(j+1) * len_input])
-                    hidden_state = torch.zeros(hidden_state.shape).to(device)
+                    predictor.prepare_hidden(prepare_dat[j * len_input:(j+1) * len_input,:,3].unsqueeze(2))
+                    hidden_state = predictor.output_hidden(train_dat[j * len_input:(j+1) * len_input,:,3].unsqueeze(2))
+                    #hidden_state = torch.zeros(hidden_state.shape).to(device)
                 stocks = torch.zeros(len_input).to(device).double()
                 money = torch.rand(len_input).to(device).double() * 35000 / 5000 + 1
                 current_min = miner[j * len_input:(j+1) * len_input, 0, 3]

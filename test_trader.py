@@ -12,7 +12,7 @@ from saver import loadagent, saveAgent
 from Normalize_data import normalize
 
 all_data = torch.load('DayliData.pt').to(device=device) #yo
-predictor = loadagent("test7")
+predictor = loadagent("test3")
 plt.plot(predictor.loss_list)
 plt.show()
 agent = loadagent("trader6")
