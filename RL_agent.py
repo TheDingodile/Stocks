@@ -9,9 +9,9 @@ from torch.nn.functional import softmax
 from random import random
 from numpy.random import choice
 
-class Network(Module):
+class Network1(Module):
     def __init__(self):
-        super(Network, self).__init__()
+        super(Network1, self).__init__()
         self.input_size = 32
         self.output_size = 5
         self.linear = Sequential(
@@ -26,7 +26,7 @@ class Network(Module):
 
 class LSTMNetwork(Module):
     def __init__(self):
-        super(Network, self).__init__()
+        super(LSTMNetwork, self).__init__()
         self.input_size = 5
         self.output_size = 5
         self.hidden_size = 50
@@ -45,16 +45,16 @@ class LSTMNetwork(Module):
 
 
 class RL_agent():
-    def __init__(self, LSTM=True) -> None:
+    def __init__(self, LSTM=False) -> None:
         self.LSTM = LSTM
         if LSTM:
             self.network = LSTMNetwork().to(device)
             self.placeholder = LSTMNetwork().to(device)
             self.target = LSTMNetwork().to(device)
         else:
-            self.network = Network().to(device)
-            self.placeholder = Network().to(device)
-            self.target = Network().to(device)
+            self.network = Network1().to(device)
+            self.placeholder = Network1().to(device)
+            self.target = Network1().to(device)
         self.optimizer = Adam(self.network.linear.parameters(), lr=1e-5, weight_decay=1e-5)
         self.criterion = MSELoss()
         self.gamma = 0.998

@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Main",
+            "type": "python",
+            "request": "launch",
+            "env": {
+                "PYTHONPATH": "${workspaceRoot}"
+            },
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceFolder}\\main.py",
+            "console": "integratedTerminal"
+        }
+        {
             "name": "generate_experiments",
             "type": "python",
             "request": "launch",
