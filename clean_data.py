@@ -63,7 +63,7 @@ def get_data(stocks=['TSLA']):
             print(final.shape)
     return final, normalizes
 
-def read_data(name = 'DayliData5ynosplit.pt'):
+def read_data(name = 'DayliDatasmall.pt'):
     names = pd.read_csv(r'stock_names.csv')
     names = names[names.columns[0]].to_numpy()
     #names = names[:500]
