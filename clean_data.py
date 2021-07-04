@@ -33,14 +33,13 @@ def get_data(stocks=['TSLA']):
             pre_year, pre_month, pre_day = year, month, day
         n = tsla_df.columns[0]
         tsla_df.drop(n, axis = 1, inplace = True)
-        #print(tsla_df)
-        #n = tsla_df.columns[-1]
-        #tsla_df.drop(n, axis = 1, inplace = True)
-        #n = tsla_df.columns[-1]
-        #tsla_df.drop(n, axis = 1, inplace = True)
-        #difs = [x - 1 for x in difs]
+        n = tsla_df.columns[-1]
+        tsla_df.drop(n, axis = 1, inplace = True)
+        n = tsla_df.columns[-1]
+        tsla_df.drop(n, axis = 1, inplace = True)
+        difs = [x - 1 for x in difs]
 
-        # data = tsla_df.to_numpy() 
+        data = tsla_df.to_numpy() 
         # plt.plot(data[:,3])
         # plt.plot(data[:,-1]*10)
         # plt.show()
@@ -59,16 +58,17 @@ def get_data(stocks=['TSLA']):
         torcher = torch.tensor(data[-360:])
         if torch.sum(torcher.isnan()) == 0:
             final = torch.cat((final, torcher.unsqueeze(0)),0)
-        if l % 5 == 0:
+        if l % 50 == 0:
             print("preparation of data " + str(round(l/len(stocks)*100)) + " percent")
             print(final.shape)
-    return final, normalizes
+        return final, normalizes
 
-
-names = pd.read_csv(r'stock_names.csv')
-names = names[names.columns[0]].to_numpy()
-#names = names[:500]
-data, normalizes = get_data(stocks=names)
-#pickle.dump(normalizes, open("normalizes.pkl", "wb"))
-torch.save(data, 'DayliData5ynosplit.pt')
-print(data.shape)
+def read_data(name = 'DayliData5ynosplit.pt'):
+    names = pd.read_csv(r'stock_names.csv')
+    names = names[names.columns[0]].to_numpy()
+    #names = names[:500]
+    data, normalizes = get_data(stocks=names)
+    #pickle.dump(normalizes, open("normalizes.pkl", "wb"))
+    torch.save(data, name)
+    print(data.shape)
+    return name
