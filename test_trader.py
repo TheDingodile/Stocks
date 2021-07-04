@@ -15,7 +15,7 @@ all_data = torch.load('DayliData.pt').to(device=device) #yo
 predictor = loadagent("test7")
 plt.plot(predictor.loss_list)
 plt.show()
-agent = loadagent("trader3")
+agent = loadagent("trader6")
 agent.show_return_forever()
 input = torch.zeros(1, 31).to(device)
 input[0,25] = 1

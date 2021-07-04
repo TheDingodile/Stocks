@@ -16,4 +16,4 @@ from Normalize_data import normalize
 from Train_trader import trainer
 
 train = trainer()
-train.train(data='DayliData.pt')
+train.train(data='DayliData.pt', name="trader7")
