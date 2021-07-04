@@ -16,6 +16,5 @@ from Normalize_data import normalize
 from Train_trader import trainer
 from clean_data import get_data, read_data
 
-name = read_data()
 train = trainer()
-train.train(data=name)
+train.train(data='DayliData.pt')
