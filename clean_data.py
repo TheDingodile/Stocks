@@ -17,7 +17,7 @@ def get_data(stocks=['TSLA']):
         l += 1
         ticker = yf.Ticker(stock)
         try:
-            tsla_df = ticker.history(period='5y', interval='1d')
+            tsla_df = ticker.history(period='10y', interval='1d')
         except:
             continue
         # clean data
@@ -44,7 +44,7 @@ def get_data(stocks=['TSLA']):
         # plt.plot(data[:,-1]*10)
         # plt.show()
 
-        if data.shape[0] < 252:
+        if data.shape[0] <= 2500:
             continue
         k = 0
         for i in range(len(difs)):
@@ -55,13 +55,13 @@ def get_data(stocks=['TSLA']):
         #data = (data - normalizes[stock][1]) / normalizes[stock][0]
         #plt.plot(data[:,0])
         #plt.show()
-        torcher = torch.tensor(data[-360:])
+        torcher = torch.tensor(data[-2500:])
         if torch.sum(torcher.isnan()) == 0:
             final = torch.cat((final, torcher.unsqueeze(0)),0)
         if l % 50 == 0:
             print("preparation of data " + str(round(l/len(stocks)*100)) + " percent")
             print(final.shape)
-        return final, normalizes
+    return final, normalizes
 
 def read_data(name = 'DayliData5ynosplit.pt'):
     names = pd.read_csv(r'stock_names.csv')
