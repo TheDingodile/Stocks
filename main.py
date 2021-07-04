@@ -16,4 +16,4 @@ from Normalize_data import normalize
 from Train_trader import trainer
 
 train = trainer()
-train.train(data='DayliData.pt', name="First_server", predict="good_only_price")
+train.train(data='DayliData.pt', name="First_server_no_hidden", predict="good_only_price")

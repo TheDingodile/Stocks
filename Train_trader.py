@@ -31,7 +31,7 @@ class trainer():
                 with torch.no_grad():
                     predictor.prepare_hidden(prepare_dat[j * len_input:(j+1) * len_input,:,3].unsqueeze(2))
                     hidden_state = predictor.output_hidden(train_dat[j * len_input:(j+1) * len_input,:,3].unsqueeze(2))
-                    #hidden_state = torch.zeros(hidden_state.shape).to(device)
+                    hidden_state = torch.zeros(hidden_state.shape).to(device)
                 stocks = torch.zeros(len_input).to(device).double()
                 money = torch.rand(len_input).to(device).double() * 35000 / 5000 + 1
                 current_min = miner[j * len_input:(j+1) * len_input, 0, 3]
