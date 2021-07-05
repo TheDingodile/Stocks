@@ -12,10 +12,10 @@ from saver import loadagent, saveAgent
 from Normalize_data import normalize
 
 all_data = torch.load('DayliData.pt').to(device=device) #yo
-predictor = loadagent("test3")
+predictor = loadagent("good_only_price")
 plt.plot(predictor.loss_list)
 plt.show()
-agent = loadagent("trader6")
+agent = loadagent("trader5")
 agent.show_return_forever()
 input = torch.zeros(1, 31).to(device)
 input[0,25] = 1
